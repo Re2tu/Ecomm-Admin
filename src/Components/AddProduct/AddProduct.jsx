@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
+
 function AddProduct() {
+  console.log("API_URL:", API_URL);
   const [image, setImage] = useState(false);
   const [productDetails, setProductDetails] = useState({
     name: "",
@@ -27,6 +29,16 @@ function AddProduct() {
     let formData = new FormData();
     formData.append('product', image);
 
+    // await fetch(`${API_URL}/upload`, {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json'
+    //   },
+    //   body: formData,
+    // })
+    //   .then((resp) => resp.json()).then((data) => { responseData = data })
+
+
     await fetch(`${API_URL}/upload`, {
       method: 'POST',
       headers: {
@@ -34,7 +46,11 @@ function AddProduct() {
       },
       body: formData,
     })
-      .then((resp) => resp.json()).then((data) => { responseData = data })
+    .then((resp) => resp.json())
+    .then((data) => { 
+      console.log("Image upload response:", data); // Log the response
+      responseData = data;
+    });
     if (responseData.success) {
       product.image = responseData.image_url;
       console.log(product);
