@@ -18,6 +18,7 @@ function AddProduct() {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value })
   }
 
+  const API_URL=process.env.REACT_APP_API_URL;
   const Add_Product = async () => {
     console.log(productDetails);
     let responseData;
@@ -26,7 +27,7 @@ function AddProduct() {
     let formData = new FormData();
     formData.append('product', image);
 
-    await fetch('https://ecomm-backend-ammz.onrender.com/upload', {
+    await fetch(`{API_URL}/upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json'
@@ -37,7 +38,7 @@ function AddProduct() {
     if (responseData.success) {
       product.image = responseData.image_url;
       console.log(product);
-      await fetch('https://ecomm-backend-ammz.onrender.com/addproduct',{
+      await fetch(`{API_URL}/addproduct`,{
         method:'POST',
         headers:{
           Accept:'application/json',
