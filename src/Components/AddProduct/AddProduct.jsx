@@ -3,7 +3,6 @@ import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 
 function AddProduct() {
-  console.log("API_URL:", API_URL);
   const [image, setImage] = useState(false);
   const [productDetails, setProductDetails] = useState({
     name: "",
@@ -22,6 +21,7 @@ function AddProduct() {
 
   const API_URL=process.env.REACT_APP_API_URL;
   const Add_Product = async () => {
+    console.log("API_URL:", API_URL);
     console.log(productDetails);
     let responseData;
     let product = productDetails;
