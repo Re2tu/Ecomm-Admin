@@ -4,7 +4,8 @@ import cross_icon from '../../assets/cross_icon.png'
 function ListProduct(){
     const [allproducts,setAllProducts]=useState([]);
 
-    const API_URL=process.env.REACT_APP_API_URL;
+    const API_URL = import.meta.env.VITE_API_URL; // Adjust based on your environment variable name
+
 
     const fetchInfo= async ()=>{
         await fetch(`${API_URL}/allproducts`)
